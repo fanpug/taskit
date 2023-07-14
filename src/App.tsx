@@ -1,22 +1,23 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { useState, useReducer } from 'react'
 import './App.css'
 import InputField from './components/InputField'
 import TodoList from './components/TodoList'
-import { Todo } from "./model"
+import todoReducer from "./reducer"
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
-  const [todos, setTodos] = useState<Todo[]>([]);
+  // const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, dispatch] = useReducer(todoReducer, []);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (todo) {
-      setTodos([...todos, {id: Date.now(), todo, isDone: false}]);
-      setTodo("");
-    }
+    dispatch({
+      type: 'added',
+      payload: todo,
+    })
+
+    setTodo("");
   };
 
   console.log(todos);
@@ -25,7 +26,7 @@ const App: React.FC = () => {
     <div className='App'>
       <span className='heading'>TaskIt</span>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoList todos={todos} dispatch={dispatch} />
     </div>
   )
 }
