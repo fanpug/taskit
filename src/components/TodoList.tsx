@@ -10,10 +10,23 @@ interface Props {
 
 const TodoList = ({todos, dispatch}: Props) => {
   return (
-    <div className="todos">
-        {todos.map(todo => (
+    <div className="container">
+      <div className="todos">
+        <span className="todos__heading">Current Tasks</span>
+        {
+          todos.map((todo) => (
             <SingleTodo todo={todo} key={todo.id} dispatch={dispatch} />
-        ))}
+          ))
+        }
+      </div>
+      <div className="todos remove">
+      <span className="todos__heading">Completed Tasks</span>
+        {
+          todos.map((todo) => (
+            <SingleTodo todo={todo} key={todo.id} dispatch={dispatch} />
+          ))
+        }
+      </div>
     </div>
   )
 }
