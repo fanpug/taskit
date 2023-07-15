@@ -1,13 +1,15 @@
-import { useState, useReducer } from 'react'
+import { useState} from 'react'
+// import { useState, useReducer } from 'react'
 import './App.css'
 import InputField from './components/InputField'
 import TodoList from './components/TodoList'
 //import todoReducer from "./reducer"
+import Todo from './model'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
-   const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   // const [todos, dispatch] = useReducer(todoReducer, []);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([])
 
